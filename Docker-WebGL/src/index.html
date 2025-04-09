@@ -1,0 +1,9 @@
+<html>
+    <body>
+        <script>
+            const isMobile = /Android|iOS|iPhone|iPad|iPod/i.test(navigator.userAgent);
+            console.log(isMobile, navigator.userAgent);
+            window.location.href = isMobile ? "Mobile/index.html" : "Desktop/index.html";
+        </script>
+    </body>
+</html>

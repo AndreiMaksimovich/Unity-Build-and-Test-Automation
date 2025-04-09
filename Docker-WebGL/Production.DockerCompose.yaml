@@ -1,0 +1,11 @@
+services:
+  unity-webgl-nginx:
+    container_name: "unity-webgl-production"
+    build:
+      context: ../
+      dockerfile: ./Docker-WebGL/Production.Dockerfile
+    image: "unity-webgl-production"
+    ports:
+      - "80:80"
+    environment:
+      - NGINX_PORT=80 

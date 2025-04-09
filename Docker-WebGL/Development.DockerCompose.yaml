@@ -1,0 +1,14 @@
+services:
+  unity-webgl-nginx-development:
+    container_name: "unity-webgl-development"
+    build:
+      context: ../
+      dockerfile: ./Docker-WebGL/Development.Dockerfile
+    image: "unity-webgl-development"
+    ports:
+      - "80:80"
+    environment:
+      - NGINX_PORT=80
+    volumes:
+      - ../Builds/WebGL/Mobile:/usr/share/nginx/html/Mobile
+      - ../Builds/WebGL/Desktop:/usr/share/nginx/html/Desktop

@@ -1,0 +1,32 @@
+server {
+    listen       ${NGINX_PORT};
+    listen  [::]:${NGINX_PORT};
+    server_name  localhost;
+
+    #access_log  /var/log/nginx/host.access.log  main;
+
+    location / {
+        root   /usr/share/nginx/html;
+        index  index.html index.htm;
+
+        add_header Access-Control-Allow-Origin *;
+
+        location ~  \.br$ {
+            gzip off;
+            add_header Content-Encoding br;
+            location ~ .+\.(data|symbols\.json)\.br$ { default_type application/octet-stream; }
+            location ~ \.wasm\.br$ { default_type application/wasm; }
+            location ~ \.js\.br$ { default_type application/javascript; }
+        }
+
+        location ~  \.gz$ {
+            gzip off;
+            add_header Content-Encoding gzip;
+            location ~ .+\.(data|symbols\.json)\.gz$ { default_type application/octet-stream; }
+            location ~ \.wasm\.gz$ { default_type application/wasm; }
+            location ~ \.js\.gz$ { default_type application/javascript; }
+        }
+
+    }
+}
+
